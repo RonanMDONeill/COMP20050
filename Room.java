@@ -1,16 +1,16 @@
 public class Room {
-
+	
 	/*
-	 * Taken from Moodle page
+	 * Taken from Moodle page & edited
 	 */
 	
 	/*
 	 * TeamSynergy:
-	 * Dáire Murphy - 15441458
-	 * Rónan O'Neill - 16433656
+	 * DÃ¡ire Murphy - 15441458
+	 * RÃ³nan O'Neill - 16433656
 	 * Lorcan Rooney - 16413092
 	 */
-	
+
     private final static int ITEM_AREA_WIDTH = 4;      // an item is a token or a weapon
     private final static int NUMBER_OF_ITEMS = 12;
 
@@ -19,9 +19,10 @@ public class Room {
     private final Coordinates[] doors;
     private boolean hasPassage = false;
     private Room passageDestination;
-    private final boolean[] squaresOccupied = new boolean[NUMBER_OF_ITEMS];
+    private final boolean[] squaresOccupied;
 
     Room(String name, Coordinates tokenArea, Coordinates[] doors) {
+        squaresOccupied = new boolean[NUMBER_OF_ITEMS];
         this.name = name;
         this.tokenArea = tokenArea;
         this.doors = doors;
@@ -32,6 +33,11 @@ public class Room {
 
     public boolean hasName(String name) {
         return this.name.toLowerCase().trim().equals(name.toLowerCase().trim());
+    }
+    
+    // Accessor for room name
+    public String getName() {
+    	return name;
     }
 
     public Coordinates getDoorCoordinates(int index) {
@@ -61,9 +67,9 @@ public class Room {
                 squareNumber++;
         }
         Coordinates position = new Coordinates(tokenArea);
-        if (squareNumber < ITEM_AREA_WIDTH) {
+        if (squareNumber <= ITEM_AREA_WIDTH) {
             position.add(new Coordinates(squareNumber , 0));
-        } else if (squareNumber < 2*ITEM_AREA_WIDTH) {
+        } else if (squareNumber <= 2 * ITEM_AREA_WIDTH) {
             position.add(new Coordinates(squareNumber - ITEM_AREA_WIDTH, +1));
         } else {
             position.add(new Coordinates(squareNumber - 2*ITEM_AREA_WIDTH, +2));
@@ -73,7 +79,7 @@ public class Room {
     }
 
     public void removeItem(Coordinates position) {
-        int squareNumber = (position.getRow()-tokenArea.getRow())*ITEM_AREA_WIDTH+position.getCol()-tokenArea.getCol();
+        int squareNumber =(position.getRow()-tokenArea.getRow())*ITEM_AREA_WIDTH+position.getCol()-tokenArea.getCol();
         squaresOccupied[squareNumber] = false;
     }
 
