@@ -9,39 +9,33 @@ public class Players implements Iterable<Player>, Iterator<Player> {
 	
 	/*
 	 * TeamSynergy:
-	 * Dáire Murphy - 15441458
-	 * Rónan O'Neill - 16433656
+	 * DÃ¡ire Murphy - 15441458
+	 * RÃ³nan O'Neill - 16433656
 	 * Lorcan Rooney - 16413092
 	 */
 	
-    private final ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
     private int currentPlayerIndex;
     private Iterator<Player> iterator;
+
+    Players() {
+    }
+
+    Players(Players players) {
+        this.players = new ArrayList<>();
+        for (Player player : players) {
+            this.players.add(player);
+        }
+    }
+
+    public void clear() {
+        players.clear();
+    }
 
     public void add(Player player) {
         players.add(player);
     }
 
-    Players () {
-		return;
-	}
-	
-	Players (Players players) {
-		for (Player p : players.get()) {
-			this.players.add(p);
-		}
-		return;
-	}
-	
-	public ArrayList<Player> get () {
-		return players;
-	}
-    
-    public void clear () {
-		players.clear();
-		return;
-	}
-    
     public boolean contains(String name) {
         for (Player player : players) {
             if (player.hasName(name)) {
@@ -51,19 +45,32 @@ public class Players implements Iterable<Player>, Iterator<Player> {
         return false;
     }
 
-    public int size() {
+    public int getNumberOfPlayers() {
         return players.size();
+    }
+
+    public Player get(String name) {
+        for (Player player : players) {
+            if (player.hasName(name)) {
+                return player;
+            }
+        }
+        return null;
     }
 
     public Player get(int index) {
         return players.get(index);
     }
+    
+    // Accesor for currentPlayerIndex
+    public int getIndex() {
+    	return currentPlayerIndex;
+    }
 
-    public void setCurrentPlayer(String name, int playerNum) {
-        for(int x = 0; x < playerNum; x++) {
-        	if(name.equals(players.get(x).getName())) {
-        		currentPlayerIndex = x;
-        	}
+    public void setCurrentPlayer(String name) {
+        currentPlayerIndex = 0;
+        while (!players.get(currentPlayerIndex).hasName(name)) {
+            currentPlayerIndex++;
         }
     }
 
@@ -78,18 +85,23 @@ public class Players implements Iterable<Player>, Iterator<Player> {
             currentPlayerIndex = 0;
         }
     }
+    
+    // Removes the indicated player from the list
+    public Player removePlayer(int index) {
+    	Player removed = players.get(index);
+    	players.remove(index);
+    	
+    	return removed;
+    }
 
-    @Override
     public boolean hasNext() {
         return iterator.hasNext();
     }
 
-    @Override
     public Player next() {
         return iterator.next();
     }
 
-    @Override
     public Iterator<Player> iterator() {
         iterator = players.iterator();
         return iterator;
