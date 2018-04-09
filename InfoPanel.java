@@ -5,26 +5,26 @@ import java.awt.*;
 public class InfoPanel extends JPanel {
 	
 	/*
-	 * Taken from Moodle page
+	 * Taken from Moodle page & edited
 	 */
 	
 	/*
 	 * TeamSynergy:
-	 * Dáire Murphy - 15441458
-	 * Rónan O'Neill - 16433656
+	 * DÃ¡ire Murphy - 15441458
+	 * RÃ³nan O'Neill - 16433656
 	 * Lorcan Rooney - 16413092
 	 */
-	
+
     private static final long serialVersionUID = 1L;
     private static final int TEXT_AREA_HEIGHT = 40;
     private static final int CHARACTER_WIDTH = 60;
     private static final int FONT_SIZE = 12;
 
-    private final JTextArea textArea = new JTextArea(TEXT_AREA_HEIGHT, CHARACTER_WIDTH);
+    private final JTextArea textArea  = new JTextArea(TEXT_AREA_HEIGHT, CHARACTER_WIDTH);
 
     InfoPanel() {
         JScrollPane scrollPane = new JScrollPane(textArea);
-        DefaultCaret caret = (DefaultCaret)textArea.getCaret();
+        DefaultCaret caret = (DefaultCaret) textArea.getCaret();
         textArea.setEditable(false);
         textArea.setFont(new Font("monospaced", Font.PLAIN, FONT_SIZE));
         textArea.setLineWrap(true);
@@ -39,8 +39,9 @@ public class InfoPanel extends JPanel {
         textArea.setText(textArea.getText()+"\n"+text);
     }
     
-    public void displayString (String text) {
-		textArea.setText(textArea.getText()+"\n"+text);
-	}
+    // Method for clearing the infoPanel
+    public void setText(String text) {
+    	textArea.setText(text);
+    }
 
 }
