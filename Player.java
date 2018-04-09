@@ -1,29 +1,28 @@
 public class Player {
-
+	
 	/*
 	 * Taken from Moodle page & edited
 	 */
 	
 	/*
 	 * TeamSynergy:
-	 * Dáire Murphy - 15441458
-	 * Rónan O'Neill - 16433656
+	 * DÃ¡ire Murphy - 15441458
+	 * RÃ³nan O'Neill - 16433656
 	 * Lorcan Rooney - 16413092
 	 */
-	
-	// Added number variable so players can be linked to cards
+
     private final String name;
     private final Token token;
-    private final int number;
+    private Cards cards;
 
-    Player(String name, Token token, int number) {
+    Player(String name, Token token) {
         this.name = name;
         this.token = token;
-        this.number = number;
+        cards = new Cards();
     }
 
     public boolean hasName(String name) {
-        return this.name.toLowerCase().equals(name.trim());
+        return this.name.toLowerCase().trim().equals(name.toLowerCase().trim());
     }
 
     public String getName() {
@@ -33,10 +32,18 @@ public class Player {
     public Token getToken() {
         return token;
     }
+
+    public void addCards(Cards cards) {
+        this.cards = cards;
+    }
     
-    // Accessor for number variable
-    public int getNumber() {
-    	return number;
+    // Accesor for card
+    public Cards getCards() {
+    	return cards;
+    }
+
+    public boolean hasCard(String name) {
+        return cards.contains(name);
     }
 
     @Override
@@ -44,3 +51,5 @@ public class Player {
         return name + " (" + token.getName() + ")";
     }
 }
+
+
