@@ -1,2 +1,2 @@
 # COMP20050
-Cluedo Game with the Bois
+Cluedo Game for Software Engineering II
